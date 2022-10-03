@@ -57,7 +57,8 @@ const CameraScreen = () => {
     useEffect(() => {
         navigator.mediaDevices.enumerateDevices()
         .then(res => {
-            console.log(res)
+            let devices = res.filter((item) => item.kind === "videoinput");
+            console.log(devices)
         }).catch((err) => err)
         // changeCamera(cameraPhoto);
         // eslint-disable-next-line
