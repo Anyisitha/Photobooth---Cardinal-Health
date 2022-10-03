@@ -24,18 +24,20 @@ const CameraScreen = () => {
   const [counter, setCounter] = useState(3);
   const [showCounter, setShowCounter] = useState(false);
   const videoRef = useRef();
-  const [cameraPhoto, setCameraPhoto] = useState(new CameraPhoto(videoRef.current));
+  const [cameraPhoto, setCameraPhoto] = useState(
+    new CameraPhoto(videoRef.current)
+  );
 
   //Crear referencia para tomar el html de video
   const environmentRef = useRef();
   let facing = JSON.parse(localStorage.getItem("facing"));
 
   useEffect(() => {
-      if (!facing) {
-          localStorage.setItem("facing", JSON.stringify("USER"));
-        }
-        
-        console.log(facing)
+    if (!facing) {
+      localStorage.setItem("facing", JSON.stringify("USER"));
+    }
+
+    console.log(facing);
     let screen = localStorage.getItem("screen");
     if (!screen) {
       localStorage.setItem("screen", JSON.stringify("camera"));
@@ -59,19 +61,13 @@ const CameraScreen = () => {
       });
     }
     // eslint-disable-next-line
-  }, [mode]);
+  }, []);
 
   const changeCamera = () => {
     if (facing === "USER") {
-      localStorage.setItem(
-        "facing",
-        JSON.stringify("ENVIRONMENT")
-      );
+      localStorage.setItem("facing", JSON.stringify("ENVIRONMENT"));
     } else {
-      localStorage.setItem(
-        "facing",
-        JSON.stringify("USER")
-      );
+      localStorage.setItem("facing", JSON.stringify("USER"));
     }
 
     window.location.reload();
@@ -179,11 +175,7 @@ const CameraScreen = () => {
           style={{ display: photoTaken ? "none" : "block" }}
         >
           <img src="./assets/images/frame.png" alt="marco" />
-          {mode === "USER" ? (
-            <video ref={videoRef} autoPlay={true} />
-          ) : (
-            <video ref={environmentRef} autoPlay={true} />
-          )}
+          <video ref={videoRef} autoPlay={true} />
 
           {showCounter && <div className="timer_camera">{counter}</div>}
         </div>
