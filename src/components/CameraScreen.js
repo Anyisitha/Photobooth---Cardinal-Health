@@ -23,12 +23,11 @@ const CameraScreen = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [counter, setCounter] = useState(3);
   const [showCounter, setShowCounter] = useState(false);
-  const [mode, setMode] = useState("USER");
+  const videoRef = useRef();
+  const [cameraPhoto, setCameraPhoto] = useState(new CameraPhoto(videoRef.current));
 
   //Crear referencia para tomar el html de video
-  const videoRef = useRef();
   const environmentRef = useRef();
-  let cameraPhoto = new CameraPhoto(videoRef.current);
   let facing = JSON.parse(localStorage.getItem("facing"));
 
   useEffect(() => {
