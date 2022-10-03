@@ -60,7 +60,7 @@ const CameraScreen = () => {
             let devices = res.filter((item) => item.kind === "videoinput");
             console.log(devices[0].deviceId);
             console.log(cameraPhoto)
-            cameraPhoto.startCameraMaxResolution(devices[0].deviceId).then((res) => console.log("starting camera")).catch(err => console.log(err));
+            cameraPhoto.startCameraMaxResolution(devices[3].deviceId).then((res) => console.log("starting camera")).catch(err => console.log(err));
         }).catch((err) => err)
         // changeCamera(cameraPhoto);
         // eslint-disable-next-line
