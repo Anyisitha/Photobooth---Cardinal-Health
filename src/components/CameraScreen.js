@@ -65,7 +65,7 @@ const CameraScreen = () => {
 
   useEffect(() => {
     navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: { exact: "enviroment" } } })
+      .getUserMedia({ video: { facingMode: { exact: "user" } } })
       .then((res) => {
         res.forEach(element => {
             getPermittedDevices(element.kind);
