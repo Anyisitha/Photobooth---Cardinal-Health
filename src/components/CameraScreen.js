@@ -8,7 +8,7 @@ import "./animate.compat.css";
 import useCameraScreen from "./useCameraScreen";
 
 //Variables de configuracion de enfoque y resolucion de la camara
-const facingMode = FACING_MODES.USER;
+const facingMode = null;
 const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
@@ -29,18 +29,23 @@ const CameraScreen = () => {
   const videoRef = useRef();
   const environmentRef = useRef();
   let cameraPhoto = null;
+  let facing = null;
   let environmentCameraPhoto = null;
 
   useEffect(() => {
+    facing = JSON.parse(localStorage.getItem("facing"));
+    if (!facing) {
+      localStorage.setItem("facing", "USER");
+    }
+
+    let screen = JSON.parse(localStorage.getItem("facing"));
+    if(screen){
+        localStorage.setItem("screen", "camera");
+    }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    if (mode === "USER") {
-      cameraPhoto = new CameraPhoto(videoRef.current);
-      startCamera(FACING_MODES.USER, idealResolution);
-    } else {
-      environmentCameraPhoto = new CameraPhoto(environmentRef.current);
-      startCamera(FACING_MODES.ENVIRONMENT, idealResolution);
-    }
+    cameraPhoto = new CameraPhoto(videoRef.current);
+    startCamera(facing, idealResolution);
     // cameraPhoto = new CameraPhoto(videoRef.current);
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
@@ -62,35 +67,22 @@ const CameraScreen = () => {
   const changeCamera = () => {
     setIsCameraReady(false);
     restartCamera();
-    setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
+    localStorage.setItem("facing", facing === "USER" ? "ENVIRONMENT" : "USER");
+    window.location.reload();
   };
 
   useEffect(() => {}, []);
 
   const startCamera = (idealFacingMode, idealResolution) => {
-    if (mode === "USER") {
-      setIsCameraReady(false);
-      cameraPhoto
-        .startCamera(idealFacingMode, idealResolution)
-        .then(() => {
-          console.log("camera is started !");
-          setIsCameraReady(true);
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    } else {
-      setIsCameraReady(false);
-      environmentCameraPhoto
-        .startCamera(idealFacingMode, idealResolution)
-        .then(() => {
-          console.log("camera is started !");
-          setIsCameraReady(true);
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
+    cameraPhoto
+      .startCamera(idealFacingMode, idealResolution)
+      .then(() => {
+        console.log("camera is started !");
+        setIsCameraReady(true);
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   // Pintar foto en canvas

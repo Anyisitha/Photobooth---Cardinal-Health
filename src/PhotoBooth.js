@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MainScreen from './components/MainScreen';
 import PermissonScreen from './components/PermissonScreen';
 import CameraScreen from './components/CameraScreen';
 
 const PhotoBooth = () => {
-
     const [screenToShow, setScreenToShow] = useState('main');
+
+    useEffect(() => {
+        let screen = JSON.parse(localStorage.getItem("screen"));
+        setScreenToShow(screen ? screen : "main");
+    }, [])
 
     return (
         <>
