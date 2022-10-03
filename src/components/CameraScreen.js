@@ -51,7 +51,12 @@ const CameraScreen = () => {
   }, []);
 
   const getPermittedDevices = async (kind) => {
-    if (!kind || !Object.values(UserMediaDetector.Kinds).includes(kind)) {
+    const Kinds = {
+        VideoInput: "videoinput",
+        AudioInput: "audioinput",
+        AudioOutput: "audioinput"
+    }
+    if (!kind || !Object.values(Kinds).includes(kind)) {
       throw Error(
         `UserMediaDetector permitted failed: kind ${kind} is not supported`
       );
