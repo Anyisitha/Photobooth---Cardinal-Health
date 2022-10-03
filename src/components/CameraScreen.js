@@ -59,6 +59,7 @@ const CameraScreen = () => {
           setIsCameraReady(true);
         })
         .catch((err) => alert(err));
+        bandera = 1;
     } else {
       cameraPhoto
         .startCamera(FACING_MODES.USER, idealResolution)
@@ -66,6 +67,7 @@ const CameraScreen = () => {
           setIsCameraReady(true);
         })
         .catch((err) => alert(err));
+        bandera = 0
     }
   };
 
