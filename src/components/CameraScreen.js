@@ -72,12 +72,12 @@ const CameraScreen = () => {
     if (facing === "USER") {
       localStorage.setItem(
         "facing",
-        "ENVIRONMENT"
+        JSON.stringify("ENVIRONMENT")
       );
     } else {
       localStorage.setItem(
         "facing",
-        "USER"
+        JSON.stringify("USER")
       );
     }
 
