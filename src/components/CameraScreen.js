@@ -55,7 +55,7 @@ const CameraScreen = () => {
     }, [])
 
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({video: {facingMode: { exact: "environment" }}}).then((res) => {
+        navigator.mediaDevices.getUserMedia({video: {facingMode: { exact: "user" }}}).then((res) => {
             console.log(res);
         }).catch((err) => console.log(err))
         // changeCamera(cameraPhoto);
