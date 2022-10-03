@@ -9,7 +9,7 @@ const PhotoBooth = () => {
 
   useEffect(() => {
     let screen = JSON.parse(localStorage.getItem("screen"));
-    setScreenToShow(screen ? screen : "main");
+    setScreenToShow(screen === "camera" ? screen : "main");
   }, []);
 
   return (

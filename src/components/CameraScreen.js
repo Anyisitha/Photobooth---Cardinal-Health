@@ -5,10 +5,9 @@ import SettingsModal from "./SettingsModal";
 
 import "./cameraScreen.css";
 import "./animate.compat.css";
-import useCameraScreen from "./useCameraScreen";
 
 //Variables de configuracion de enfoque y resolucion de la camara
-const facingMode = null;
+// const facingMode = FACING_MODES.ENVIRONMENT;
 const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
@@ -23,13 +22,24 @@ const CameraScreen = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [counter, setCounter] = useState(3);
   const [showCounter, setShowCounter] = useState(false);
+  /** Variables */
   const videoRef = useRef();
-  const [cameraPhoto, setCameraPhoto] = useState(
-    new CameraPhoto(videoRef.current)
-  );
+  let cameraPhoto = new CameraPhoto(videoRef);
 
   //Crear referencia para tomar el html de video
   let facing = JSON.parse(localStorage.getItem("facing"));
+
+  const startCamera = () => {
+    let facingMode = facing === "USER" 
+      ? FACING_MODES.USER 
+      : FACING_MODES.ENVIRONMENT;
+    cameraPhoto
+      .startCamera(facingMode, idealResolution)
+      .then(() => {
+        setIsCameraReady(true);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     if (!facing) {
@@ -41,10 +51,13 @@ const CameraScreen = () => {
     if (!screen) {
       localStorage.setItem("screen", JSON.stringify("camera"));
     }
+    // eslint-disable-next-line
+    cameraPhoto = new CameraPhoto(videoRef.current);
+
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    setCameraPhoto(new CameraPhoto(videoRef.current));
-    startCamera(FACING_MODES[facing], idealResolution);
+    // setCameraPhoto(new CameraPhoto(videoRef.current));
+    startCamera();
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
 
@@ -74,20 +87,21 @@ const CameraScreen = () => {
 
   useEffect(() => {}, []);
 
-  const startCamera = (idealFacingMode, idealResolution) => {
-    console.log("facing_mode", idealFacingMode);
-    console.log("resolution", idealResolution);
-    let facingMode = facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
-    cameraPhoto
-      .startCamera(facingMode, idealResolution)
-      .then(() => {
-        console.log("camera is started !");
-        setIsCameraReady(true);
-      })
-      .catch((error) => {
-        alert(error, "asnid");
-      });
-  };
+  // const startCamera = (idealFacingMode, idealResolution) => {
+  //   console.log("facing_mode", idealFacingMode);
+  //   console.log("resolution", idealResolution);
+  //   console.log("dsfdsaf", facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT)
+  //   let facingMode = facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
+  //   cameraPhoto
+  //     .startCamera(facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT, idealResolution)
+  //     .then(() => {
+  //       console.log("camera is started !");
+  //       setIsCameraReady(true);
+  //     })
+  //     .catch((error) => {
+  //       alert(error, "asnid");
+  //     });
+  // };
 
   // Pintar foto en canvas
   const displayPicture = (uri) => {
@@ -177,7 +191,7 @@ const CameraScreen = () => {
           style={{ display: photoTaken ? "none" : "block" }}
         >
           <img src="./assets/images/frame.png" alt="marco" />
-          <video ref={videoRef} autoPlay={true} />
+          <video ref={videoRef} autoPlay={true} id="video"/>
 
           {showCounter && <div className="timer_camera">{counter}</div>}
         </div>
