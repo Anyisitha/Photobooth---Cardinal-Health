@@ -68,7 +68,9 @@ const CameraScreen = () => {
     setIsCameraReady(false);
     restartCamera();
     localStorage.setItem("facing", facing === "USER" ? "ENVIRONMENT" : "USER");
-    window.location.reload();
+    setTimeout(() => {
+        window.location.reload();
+    }, 2000)
   };
 
   useEffect(() => {}, []);
