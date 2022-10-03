@@ -23,6 +23,7 @@ const CameraScreen = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [counter, setCounter] = useState(3);
   const [showCounter, setShowCounter] = useState(false);
+  const [mode, setMode] = useState("USER");
 
   //Crear referencia para tomar el html de video
   const videoRef = useRef();
@@ -34,7 +35,7 @@ const CameraScreen = () => {
     cameraPhoto = new CameraPhoto(videoRef.current);
 
     console.log(cameraPhoto.inputVideoDeviceInfos);
-    startCamera(facingMode, idealResolution);
+    startCamera(FACING_MODES[mode], idealResolution);
 
     if (window.innerWidth < 1200) {
       window.addEventListener("orientationchange", (e) => {
@@ -48,30 +49,13 @@ const CameraScreen = () => {
       });
     }
     // eslint-disable-next-line
-  }, []);
+  }, [mode]);
 
-  const [mode, setMode] = useState("USER");
 
   const changeCamera = () => {
     setIsCameraReady(false);
     restartCamera();
-    if (mode === "USER") {
-      cameraPhoto
-        .startCamera(FACING_MODES.ENVIRONMENT)
-        .then((stream) => {
-            setIsCameraReady(true);
-          setMode("USER");
-        })
-        .catch((err) => alert(err));
-    } else {
-      cameraPhoto
-        .startCamera(FACING_MODES.USER)
-        .then((stream) => {
-          setIsCameraReady(true);
-          setMode("ENVIRONMENT");
-        })
-        .catch((err) => alert(err));
-    }
+    setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
   };
 
   useEffect(() => {}, []);
