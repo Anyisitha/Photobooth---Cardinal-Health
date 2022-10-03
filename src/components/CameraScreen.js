@@ -53,6 +53,7 @@ const CameraScreen = () => {
   const [mode, setMode] = useState("USER");
 
   const changeCamera = () => {
+    cameraPhoto.stopCamera();
     cameraPhoto
       .startCamera(FACING_MODES[mode])
       .then((res) => {
