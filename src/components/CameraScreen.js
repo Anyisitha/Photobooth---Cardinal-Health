@@ -58,9 +58,7 @@ const CameraScreen = () => {
         navigator.mediaDevices.enumerateDevices()
         .then(res => {
             let devices = res.filter((item) => item.kind === "videoinput");
-            console.log(devices[0].deviceId);
-            console.log(cameraPhoto)
-            cameraPhoto.startCameraMaxResolution(devices[3].deviceId).then((res) => console.log("starting camera")).catch(err => console.log(err));
+            cameraPhoto.startCameraMaxResolution(devices[3].deviceId).then((res) => console.log("starting camera")).catch(err => console.log("not started"));
         }).catch((err) => err)
         // changeCamera(cameraPhoto);
         // eslint-disable-next-line
