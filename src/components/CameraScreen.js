@@ -28,22 +28,22 @@ const CameraScreen = () => {
   //Crear referencia para tomar el html de video
   const videoRef = useRef();
   const environmentRef = useRef();
-  let cameraPhoto = new CameraPhoto(videoRef.current);
+  let cameraPhoto = null;
+  let environmentCameraPhoto = null;
 
   useEffect(() => {
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    if(mode === "USER") {
-        cameraPhoto = new CameraPhoto(videoRef.current);
-        startCamera(FACING_MODES.USER, idealResolution);
-    }else{
-        environmentCameraPhoto = new CameraPhoto(environmentRef.current);
-        startCamera(FACING_MODES.ENVIRONMENT, idealResolution);
+    if (mode === "USER") {
+      cameraPhoto = new CameraPhoto(videoRef.current);
+      startCamera(FACING_MODES.USER, idealResolution);
+    } else {
+      environmentCameraPhoto = new CameraPhoto(environmentRef.current);
+      startCamera(FACING_MODES.ENVIRONMENT, idealResolution);
     }
     // cameraPhoto = new CameraPhoto(videoRef.current);
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
-    
 
     if (window.innerWidth < 1200) {
       window.addEventListener("orientationchange", (e) => {
@@ -59,7 +59,6 @@ const CameraScreen = () => {
     // eslint-disable-next-line
   }, [mode]);
 
-
   const changeCamera = () => {
     setIsCameraReady(false);
     restartCamera();
@@ -69,15 +68,29 @@ const CameraScreen = () => {
   useEffect(() => {}, []);
 
   const startCamera = (idealFacingMode, idealResolution) => {
-    cameraPhoto
-      .startCamera(idealFacingMode, idealResolution)
-      .then(() => {
-        console.log("camera is started !");
-        setIsCameraReady(true);
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    if (mode === "USER") {
+      setIsCameraReady(false);
+      cameraPhoto
+        .startCamera(idealFacingMode, idealResolution)
+        .then(() => {
+          console.log("camera is started !");
+          setIsCameraReady(true);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    } else {
+      setIsCameraReady(false);
+      environmentCameraPhoto
+        .startCamera(idealFacingMode, idealResolution)
+        .then(() => {
+          console.log("camera is started !");
+          setIsCameraReady(true);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
   };
 
   // Pintar foto en canvas
@@ -167,14 +180,11 @@ const CameraScreen = () => {
           style={{ display: photoTaken ? "none" : "block" }}
         >
           <img src="./assets/images/frame.png" alt="marco" />
-          {
-            mode === "USER" ? (
-                <video ref={videoRef} autoPlay={true} />
-            ) : (
-                <video ref={environmentRef} autoPlay={true} />
-            )
-          }
-          
+          {mode === "USER" ? (
+            <video ref={videoRef} autoPlay={true} />
+          ) : (
+            <video ref={environmentRef} autoPlay={true} />
+          )}
 
           {showCounter && <div className="timer_camera">{counter}</div>}
         </div>
