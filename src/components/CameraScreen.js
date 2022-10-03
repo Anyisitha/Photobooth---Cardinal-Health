@@ -30,7 +30,6 @@ const CameraScreen = () => {
   const environmentRef = useRef();
   let cameraPhoto = new CameraPhoto(videoRef.current);
   let facing = JSON.parse(localStorage.getItem("facing"));
-  let environmentCameraPhoto = null;
 
   useEffect(() => {
       if (!facing) {
@@ -44,8 +43,8 @@ const CameraScreen = () => {
     }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    startCamera(FACING_MODES[facing], idealResolution);
     // cameraPhoto = new CameraPhoto(videoRef.current);
+    startCamera(FACING_MODES[facing], idealResolution);
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
 
