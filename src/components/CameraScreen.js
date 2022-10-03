@@ -110,6 +110,7 @@ const CameraScreen = () => {
 
   // Tomar la foto
   const takePhoto = () => {
+    localStorage.removeItem("screen")
     const config = {
       sizeFactor: 1,
     };
