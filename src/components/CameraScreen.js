@@ -54,17 +54,11 @@ const CameraScreen = () => {
 
   const changeCamera = () => {
     cameraPhoto
-      .stopCamera()
-      .then(() => {
-        cameraPhoto
           .startCamera(FACING_MODES[mode])
-          .then((res) => {
-            setIsCameraReady(true);
-            setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
+          .then((stream) => {
+            console.log(stream)
           })
           .catch((err) => alert(err));
-      })
-      .catch((err) => console.log(err, "stop"));
   };
 
   useEffect(() => {}, []);
