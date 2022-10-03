@@ -27,15 +27,23 @@ const CameraScreen = () => {
 
   //Crear referencia para tomar el html de video
   const videoRef = useRef();
+  const environmentRef = useRef();
   let cameraPhoto = new CameraPhoto(videoRef.current);
 
   useEffect(() => {
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    cameraPhoto = new CameraPhoto(videoRef.current);
+    if(mode === "USER") {
+        cameraPhoto = new CameraPhoto(videoRef.current);
+        startCamera(FACING_MODES.USER, idealResolution);
+    }else{
+        environmentCameraPhoto = new CameraPhoto(environmentRef.current);
+        startCamera(FACING_MODES.ENVIRONMENT, idealResolution);
+    }
+    // cameraPhoto = new CameraPhoto(videoRef.current);
 
-    console.log(cameraPhoto.inputVideoDeviceInfos);
-    startCamera(FACING_MODES[mode], idealResolution);
+    // console.log(cameraPhoto.inputVideoDeviceInfos);
+    
 
     if (window.innerWidth < 1200) {
       window.addEventListener("orientationchange", (e) => {
@@ -159,7 +167,14 @@ const CameraScreen = () => {
           style={{ display: photoTaken ? "none" : "block" }}
         >
           <img src="./assets/images/frame.png" alt="marco" />
-          <video ref={videoRef} autoPlay={true} />
+          {
+            mode === "USER" ? (
+                <video ref={videoRef} autoPlay={true} />
+            ) : (
+                <video ref={environmentRef} autoPlay={true} />
+            )
+          }
+          
 
           {showCounter && <div className="timer_camera">{counter}</div>}
         </div>
