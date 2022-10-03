@@ -147,9 +147,9 @@ const CameraScreen = () => {
 
       setTimeout(() => {
         const dataUri = cameraPhoto.getDataUri(config);
-
-        displayPicture(dataUri);
-        setPhotoTaken(true);
+        console.log(dataUri)
+        // displayPicture(dataUri);
+        // setPhotoTaken(true);
       }, 3000);
     } else {
       const dataUri = cameraPhoto.getDataUri(config);
