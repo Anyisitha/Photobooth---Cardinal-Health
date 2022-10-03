@@ -107,14 +107,14 @@ const CameraScreen = () => {
   const displayPicture = (uri) => {
     const canvas = document.getElementById("photo");
     const ctx = canvas.getContext("2d");
-    console.log(canvas);
     const image = new Image();
-
+    
     image.onload = function () {
       ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
-
+      
       const frame = new Image();
-
+      
+      console.log(canvas);
       frame.onload = function () {
         ctx.drawImage(frame, 0, 0, 670, 350);
         setImageToDownload(canvas.toDataURL("image/jpg"));
