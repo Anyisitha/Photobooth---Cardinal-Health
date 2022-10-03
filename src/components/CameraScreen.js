@@ -36,12 +36,12 @@ const CameraScreen = () => {
     facing = JSON.parse(localStorage.getItem("facing"));
     console.log(facing)
     if (!facing) {
-      localStorage.setItem("facing", "USER");
+      localStorage.setItem("facing", JSON.stringify("USER"));
     }
 
     let screen = localStorage.getItem("screen");
     if (!screen) {
-      localStorage.setItem("screen", "camera");
+      localStorage.setItem("screen", JSON.stringify("camera"));
     }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
