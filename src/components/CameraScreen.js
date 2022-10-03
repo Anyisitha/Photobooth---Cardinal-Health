@@ -131,35 +131,35 @@ const CameraScreen = () => {
   // Tomar la foto
   const takePhoto = () => {
     // localStorage.removeItem("screen");
-    const config = {
-      sizeFactor: 1,
-    };
+    // const config = {
+    //   sizeFactor: 1,
+    // };
 
 
-    if (isTimerSet) {
-      //Cuando se activa el temporizador
+    // if (isTimerSet) {
+    //   //Cuando se activa el temporizador
 
-      setShowCounter(true);
+    //   setShowCounter(true);
 
-      setTimeout(() => {
-        setCounter(2);
-      }, 1000);
-      setTimeout(() => {
-        setCounter(1);
-      }, 2000);
+    //   setTimeout(() => {
+    //     setCounter(2);
+    //   }, 1000);
+    //   setTimeout(() => {
+    //     setCounter(1);
+    //   }, 2000);
 
-      setTimeout(() => {
-        const dataUri = cameraPhoto.getDataUri(config);
-        console.log(dataUri);
-        // displayPicture(dataUri);
-        // setPhotoTaken(true);
-      }, 3000);
-    } else {
-      const dataUri = cameraPhoto.getDataUri(config);
-      // console.log(dataUri)
-      displayPicture(dataUri);
-      setPhotoTaken(true);
-    }
+    //   setTimeout(() => {
+    //     const dataUri = cameraPhoto.getDataUri(config);
+    //     console.log(dataUri);
+    //     // displayPicture(dataUri);
+    //     // setPhotoTaken(true);
+    //   }, 3000);
+    // } else {
+    //   const dataUri = cameraPhoto.getDataUri(config);
+    //   // console.log(dataUri)
+    //   displayPicture(dataUri);
+    //   setPhotoTaken(true);
+    // }
   };
 
   //Reiniciar camara
