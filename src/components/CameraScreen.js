@@ -57,7 +57,6 @@ const CameraScreen = () => {
       .startCamera(FACING_MODES[mode])
       .then((res) => {
         setIsCameraReady(true);
-        bandera = 1;
       })
       .catch((err) => alert(err));
 
