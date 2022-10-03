@@ -34,11 +34,12 @@ const CameraScreen = () => {
 
   useEffect(() => {
     facing = localStorage.getItem("facing");
+    console.log(facing)
     if (!facing) {
       localStorage.setItem("facing", "USER");
     }
 
-    let screen = localStorage.getItem("facing");
+    let screen = localStorage.getItem("screen");
     if (screen) {
       localStorage.setItem("screen", "camera");
     }
