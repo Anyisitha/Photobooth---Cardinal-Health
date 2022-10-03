@@ -133,6 +133,8 @@ const CameraScreen = () => {
       sizeFactor: 1,
     };
 
+    console.log(isTimerSet)
+
     if (isTimerSet) {
       //Cuando se activa el temporizador
 
@@ -153,7 +155,7 @@ const CameraScreen = () => {
       }, 3000);
     } else {
       const dataUri = cameraPhoto.getDataUri(config);
-
+      // console.log(dataUri)
       displayPicture(dataUri);
       setPhotoTaken(true);
     }
