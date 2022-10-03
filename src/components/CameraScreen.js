@@ -29,7 +29,6 @@ const CameraScreen = () => {
   );
 
   //Crear referencia para tomar el html de video
-  const environmentRef = useRef();
   let facing = JSON.parse(localStorage.getItem("facing"));
 
   useEffect(() => {
@@ -37,14 +36,14 @@ const CameraScreen = () => {
       localStorage.setItem("facing", JSON.stringify("USER"));
     }
 
-    console.log(facing);
     let screen = JSON.parse(localStorage.getItem("screen"));
+
     if (!screen) {
       localStorage.setItem("screen", JSON.stringify("camera"));
     }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    // cameraPhoto = new CameraPhoto(videoRef.current);
+    cameraPhoto = new CameraPhoto(videoRef.current);
     startCamera(FACING_MODES[facing], idealResolution);
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
