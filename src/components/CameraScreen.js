@@ -64,7 +64,7 @@ const CameraScreen = () => {
           })
           .catch((err) => alert(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, "stop"));
   };
 
   useEffect(() => {}, []);
