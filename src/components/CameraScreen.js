@@ -8,12 +8,12 @@ import "./animate.compat.css";
 import useCameraScreen from "./useCameraScreen";
 
 //Variables de configuracion de enfoque y resolucion de la camara
-const facingMode = FACING_MODES.USER;
+const facingMode = FACING_MODES.ENVIRONMENT;
 const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
   /** Hooks */
-  const { changeCamera } = useCameraScreen();
+  //   const { changeCamera } = useCameraScreen();
 
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [photoTaken, setPhotoTaken] = useState(false);
@@ -50,35 +50,26 @@ const CameraScreen = () => {
     // eslint-disable-next-line
   }, []);
 
-  const getPermittedDevices = async (kind) => {
-    const Kinds = {
-        VideoInput: "videoinput",
-        AudioInput: "audioinput",
-        AudioOutput: "audioinput"
-    }
-    if (!kind || !Object.values(Kinds).includes(kind)) {
-      throw Error(
-        `UserMediaDetector permitted failed: kind ${kind} is not supported`
-      );
+  const changeCamera = () => {
+    let bandera = 0;
+    if (bandera === 0) {
+      cameraPhoto
+        .startCamera(FACING_MODES.ENVIRONMENT, idealResolution)
+        .then((res) => {
+          setIsCameraReady(true);
+        })
+        .catch((err) => alert(err));
+    } else {
+      cameraPhoto
+        .startCamera(FACING_MODES.USER, idealResolution)
+        .then((res) => {
+          setIsCameraReady(true);
+        })
+        .catch((err) => alert(err));
     }
   };
 
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: { exact: "user" } } })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => console.log(err));
-
-    navigator.mediaDevices
-      .enumerateDevices()
-      .then((res) => {})
-      .catch((err) => console.log(err));
-
-    // changeCamera(cameraPhoto);
-    // eslint-disable-next-line
-  }, []);
+  useEffect(() => {}, []);
 
   const startCamera = (idealFacingMode, idealResolution) => {
     cameraPhoto
@@ -213,6 +204,10 @@ const CameraScreen = () => {
       ) : (
         <div className="btns-wrapper_camera">
           <div className="div-wrapper">
+            <div className="trie">
+              <button onClick={changeCamera}>girar</button>
+              {/* <p className="blue">Descarta esta foto <br /> e intenta de nuevo</p> */}
+            </div>
             <div className="trie">
               <button
                 className="try-btn_camera"
