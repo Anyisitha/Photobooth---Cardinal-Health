@@ -105,7 +105,7 @@ const CameraScreen = () => {
   // Pintar foto en canvas
   const displayPicture = (uri) => {
     console.log(uri)
-    // const canvas = document.getElementById("photo");
+    const canvas = document.getElementById("photo");
     // const ctx = canvas.getContext("2d");
     // const image = new Image();
     // console.log(image)
@@ -118,7 +118,7 @@ const CameraScreen = () => {
     //     console.log(canvas);
     //     frame.onload = function () {
     //       ctx.drawImage(frame, 0, 0, 670, 350);
-    //       setImageToDownload(canvas.toDataURL("image/jpg"));
+          setImageToDownload(canvas.toDataURL("image/jpg"));
     //     };
 
     //     frame.src = "./assets/images/frame.png";
