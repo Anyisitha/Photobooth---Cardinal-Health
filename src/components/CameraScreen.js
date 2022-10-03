@@ -38,7 +38,7 @@ const CameraScreen = () => {
     }
 
     console.log(facing);
-    let screen = localStorage.getItem("screen");
+    let screen = JSON.parse(localStorage.getItem("screen"));
     if (!screen) {
       localStorage.setItem("screen", JSON.stringify("camera"));
     }
@@ -76,6 +76,8 @@ const CameraScreen = () => {
   useEffect(() => {}, []);
 
   const startCamera = (idealFacingMode, idealResolution) => {
+    console.log("facing_mode", idealFacingMode);
+    console.log("resolution", idealResolution);
     cameraPhoto
       .startCamera(idealFacingMode, idealResolution)
       .then(() => {
