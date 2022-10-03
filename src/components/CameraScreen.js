@@ -67,9 +67,7 @@ const CameraScreen = () => {
     navigator.mediaDevices
       .getUserMedia({ video: { facingMode: { exact: "user" } } })
       .then((res) => {
-        res.forEach(element => {
-            getPermittedDevices(element.kind);
-        });
+        console.log(res)
       })
       .catch((err) => console.log(err));
 
