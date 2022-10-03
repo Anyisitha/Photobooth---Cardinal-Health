@@ -65,9 +65,6 @@ const CameraScreen = () => {
   }, [mode]);
 
   const changeCamera = () => {
-    setIsCameraReady(false);
-    restartCamera();
-    console.log(facing)
     if (facing === "USER") {
       localStorage.setItem(
         "facing",
