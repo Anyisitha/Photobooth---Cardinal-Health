@@ -53,15 +53,18 @@ const CameraScreen = () => {
   const [mode, setMode] = useState("USER");
 
   const changeCamera = () => {
-    cameraPhoto.stopCamera();
     cameraPhoto
-      .startCamera(FACING_MODES[mode])
-      .then((res) => {
-        setIsCameraReady(true);
+      .stopCamera()
+      .then(() => {
+        cameraPhoto
+          .startCamera(FACING_MODES[mode])
+          .then((res) => {
+            setIsCameraReady(true);
+            setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
+          })
+          .catch((err) => alert(err));
       })
-      .catch((err) => alert(err));
-
-    setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {}, []);
