@@ -28,7 +28,7 @@ const CameraScreen = () => {
   //Crear referencia para tomar el html de video
   const videoRef = useRef();
   const environmentRef = useRef();
-  let cameraPhoto = null;
+  let cameraPhoto = new CameraPhoto(videoRef.current);
   let facing = JSON.parse(localStorage.getItem("facing"));
   let environmentCameraPhoto = null;
 
@@ -44,7 +44,6 @@ const CameraScreen = () => {
     }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
-    cameraPhoto = new CameraPhoto(videoRef.current);
     startCamera(FACING_MODES[facing], idealResolution);
     // cameraPhoto = new CameraPhoto(videoRef.current);
 
