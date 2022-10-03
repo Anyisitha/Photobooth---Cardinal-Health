@@ -40,7 +40,7 @@ const CameraScreen = () => {
     }
 
     let screen = localStorage.getItem("screen");
-    if (screen) {
+    if (!screen) {
       localStorage.setItem("screen", "camera");
     }
     //Instanciar la libreria e iniciar la camara
