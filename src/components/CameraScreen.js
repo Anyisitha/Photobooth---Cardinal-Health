@@ -1,5 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import CameraPhoto, { FACING_MODES } from "jslib-html5-camera-photo";
+import CameraPhoto, {
+  FACING_MODES,
+  IMAGE_TYPES,
+} from "jslib-html5-camera-photo";
+
+import useCameraScreen from "./useCameraScreen";
 
 import SettingsModal from "./SettingsModal";
 
@@ -12,7 +17,7 @@ const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
   /** Hooks */
-  //   const { changeCamera } = useCameraScreen();
+    const { getDataUri } = useCameraScreen();
 
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [photoTaken, setPhotoTaken] = useState(false);
@@ -104,8 +109,42 @@ const CameraScreen = () => {
 
   // Pintar foto en canvas
   const displayPicture = (uri) => {
-    console.log(uri);
-    const canvas = document.getElementById("photo");
+    
+    // console.log(context.toDataURL("jpg"));
+    // let canvas = document.createElement("canvas");
+    // let context = canvas.getContext("2d");
+    // console.log(videoRef.current);
+    // context.drawImage(document.getElementById("video"), 0, 0, 470, 350)
+    // let dataUri = context.toDataURL("jpg");
+    // console.log(dataUri);
+    // console.log(uri);
+    // const canvas = document.getElementById("photo");
+    // let context = canvas.getContext("2d");
+    // context.drawImage(videoRef.current, 0, 0, 470, 350);
+    // let dataUri = context.toDataURL("image/jpg");
+    // console.log(dataUri);
+
+    // let { sizeFactor, imageType, imageCompression, isImageMirror } = config;
+
+    // let { videoWidth, videoHeight } = videoElement;
+    // let { imageWidth, imageHeight } = getImageSize(videoWidth, videoHeight, sizeFactor);
+
+    // // Build the canvas size et draw the image to context from videoElement
+    // let canvas = document.createElement('canvas');
+    // canvas.width = imageWidth;
+    // canvas.height = imageHeight;
+    // let context = canvas.getContext('2d');
+
+    // // Flip horizontally (as css transform: rotateY(180deg))
+    // if (isImageMirror) {
+    //   context.setTransform(-1, 0, 0, 1, canvas.width, 0);
+    // }
+
+    // context.drawImage(videoElement, 0, 0, imageWidth, imageHeight);
+
+    // // Get dataUri from canvas
+    // let dataUri = getDataUri(canvas, imageType, imageCompression);
+    // return dataUri;
     // const ctx = canvas.getContext("2d");
     // const image = new Image();
     // console.log(image)
@@ -118,7 +157,7 @@ const CameraScreen = () => {
     //     console.log(canvas);
     //     frame.onload = function () {
     //       ctx.drawImage(frame, 0, 0, 670, 350);
-    setImageToDownload(canvas.toDataURL("image/jpg"));
+    
     //     };
 
     //     frame.src = "./assets/images/frame.png";
@@ -126,50 +165,45 @@ const CameraScreen = () => {
 
     //   image.src = uri;
     // }
+    const canvas = document.getElementById("photo");
+    let context = canvas.getContext("2d");
+    let image = new Image();
+    image.onload = () => {
+      context.drawImage(image, canvas.width * 0.1, 0, 470, 350);
+      setImageToDownload(canvas.toDataURL("jpg"));
+
+      let frame = new Image();
+      frame.onload = () => {
+        context.drawImage(frame, 0, 0, 670, 350);
+      }
+
+      frame.src = "./assets/images/frame.png";
+    }
+
+    image.src = uri;
   };
 
   // Tomar la foto
   const takePhoto = () => {
-    let config = {
-      sizeFactor: 1,
-    };
-    
-    const dataUri = cameraPhoto.getDataUri(config);
+    let dataUri = getDataUri();
 
-    if (isTimerSet) {
-      console.log(dataUri);
+    if(isTimerSet) {
+      setTimeout(() => {
+        setCounter(2);
+      }, 1000);
+
+      setTimeout(() => {
+        setCounter(1);
+      }, 2000);
+
+      setTimeout(() => {
+        displayPicture(dataUri);
+        setPhotoTaken(true);
+      }, 3000)
     } else {
-      console.log(dataUri);
+      displayPicture(dataUri);
+      setPhotoTaken(true);
     }
-    // localStorage.removeItem("screen");
-    // const config = {
-    //   sizeFactor: 1,
-    // };
-
-    // if (isTimerSet) {
-    //   //Cuando se activa el temporizador
-
-    //   setShowCounter(true);
-
-    //   setTimeout(() => {
-    //     setCounter(2);
-    //   }, 1000);
-    //   setTimeout(() => {
-    //     setCounter(1);
-    //   }, 2000);
-
-    //   setTimeout(() => {
-    //     const dataUri = cameraPhoto.getDataUri(config);
-    //     console.log(dataUri);
-    //     // displayPicture(dataUri);
-    //     // setPhotoTaken(true);
-    //   }, 3000);
-    // } else {
-    //   const dataUri = cameraPhoto.getDataUri(config);
-    //   // console.log(dataUri)
-    //   displayPicture(dataUri);
-    //   setPhotoTaken(true);
-    // }
   };
 
   //Reiniciar camara
