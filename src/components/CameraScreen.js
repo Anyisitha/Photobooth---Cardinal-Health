@@ -78,8 +78,9 @@ const CameraScreen = () => {
   const startCamera = (idealFacingMode, idealResolution) => {
     console.log("facing_mode", idealFacingMode);
     console.log("resolution", idealResolution);
+    let facingMode = facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
     cameraPhoto
-      .startCamera(idealFacingMode, idealResolution)
+      .startCamera(facingMode, idealResolution)
       .then(() => {
         console.log("camera is started !");
         setIsCameraReady(true);
