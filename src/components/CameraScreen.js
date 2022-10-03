@@ -33,12 +33,12 @@ const CameraScreen = () => {
   let environmentCameraPhoto = null;
 
   useEffect(() => {
-    facing = JSON.parse(localStorage.getItem("facing"));
+    facing = localStorage.getItem("facing");
     if (!facing) {
       localStorage.setItem("facing", "USER");
     }
 
-    let screen = JSON.parse(localStorage.getItem("facing"));
+    let screen = localStorage.getItem("facing");
     if(screen){
         localStorage.setItem("screen", "camera");
     }

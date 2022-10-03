@@ -1,42 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import MainScreen from './components/MainScreen';
-import PermissonScreen from './components/PermissonScreen';
-import CameraScreen from './components/CameraScreen';
+import MainScreen from "./components/MainScreen";
+import PermissonScreen from "./components/PermissonScreen";
+import CameraScreen from "./components/CameraScreen";
 
 const PhotoBooth = () => {
-    const [screenToShow, setScreenToShow] = useState('main');
+  const [screenToShow, setScreenToShow] = useState("main");
 
-    useEffect(() => {
-        let screen = JSON.parse(localStorage.getItem("screen"));
-        setScreenToShow(screen ? screen : "main");
-    }, [])
+  useEffect(() => {
+    let screen = localStorage.getItem("screen");
+    setScreenToShow(screen ? screen : "main");
+  }, []);
 
-    return (
-        <>
+  return (
+    <>
+      {screenToShow === "main" && (
+        <MainScreen setScreenToShow={setScreenToShow} />
+      )}
 
-        {
-            (screenToShow === 'main') &&
-            <MainScreen 
-                setScreenToShow={ setScreenToShow } 
-            />
-        }
+      {screenToShow === "permisson" && (
+        <PermissonScreen setScreenToShow={setScreenToShow} />
+      )}
 
-        {
-            (screenToShow === 'permisson') &&
-            <PermissonScreen 
-                setScreenToShow={ setScreenToShow } 
-            />
-        }
-
-        {
-            (screenToShow === 'camera') &&
-            <CameraScreen />
-        }
-
-        </>
-    );
+      {screenToShow === "camera" && <CameraScreen />}
+    </>
+  );
 };
-
 
 export default PhotoBooth;
