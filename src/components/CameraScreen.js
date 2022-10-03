@@ -50,8 +50,8 @@ const CameraScreen = () => {
     // eslint-disable-next-line
   }, []);
 
+  let bandera = 0;
   const changeCamera = () => {
-    let bandera = 0;
     if (bandera === 0) {
       cameraPhoto
         .startCamera(FACING_MODES.ENVIRONMENT, idealResolution)
