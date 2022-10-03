@@ -8,7 +8,7 @@ import "./animate.compat.css";
 import useCameraScreen from "./useCameraScreen";
 
 //Variables de configuracion de enfoque y resolucion de la camara
-const facingMode = FACING_MODES.ENVIRONMENT;
+const facingMode = FACING_MODES.USER;
 const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
