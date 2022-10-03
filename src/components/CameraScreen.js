@@ -30,9 +30,8 @@ const CameraScreen = () => {
   let facing = JSON.parse(localStorage.getItem("facing"));
 
   const startCamera = () => {
-    let facingMode = facing === "USER" 
-      ? FACING_MODES.USER 
-      : FACING_MODES.ENVIRONMENT;
+    let facingMode =
+      facing === "USER" ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
     cameraPhoto
       .startCamera(facingMode, idealResolution)
       .then(() => {
@@ -108,22 +107,23 @@ const CameraScreen = () => {
     const canvas = document.getElementById("photo");
     const ctx = canvas.getContext("2d");
     const image = new Image();
-    
-    image.onload = function () {
-      ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
-      
-      const frame = new Image();
-      
-      console.log(canvas);
-      frame.onload = function () {
-        ctx.drawImage(frame, 0, 0, 670, 350);
-        setImageToDownload(canvas.toDataURL("image/jpg"));
+    if (ctx) {
+      image.onload = function () {
+        ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
+
+        const frame = new Image();
+
+        console.log(canvas);
+        frame.onload = function () {
+          ctx.drawImage(frame, 0, 0, 670, 350);
+          setImageToDownload(canvas.toDataURL("image/jpg"));
+        };
+
+        frame.src = "./assets/images/frame.png";
       };
 
-      frame.src = "./assets/images/frame.png";
-    };
-
-    image.src = uri;
+      image.src = uri;
+    }
   };
 
   // Tomar la foto
@@ -133,7 +133,7 @@ const CameraScreen = () => {
       sizeFactor: 1,
     };
 
-    console.log(isTimerSet)
+    console.log(isTimerSet);
 
     if (isTimerSet) {
       //Cuando se activa el temporizador
@@ -149,7 +149,7 @@ const CameraScreen = () => {
 
       setTimeout(() => {
         const dataUri = cameraPhoto.getDataUri(config);
-        console.log(dataUri)
+        console.log(dataUri);
         // displayPicture(dataUri);
         // setPhotoTaken(true);
       }, 3000);
@@ -193,7 +193,7 @@ const CameraScreen = () => {
           style={{ display: photoTaken ? "none" : "block" }}
         >
           <img src="./assets/images/frame.png" alt="marco" />
-          <video ref={videoRef} autoPlay={true} id="video"/>
+          <video ref={videoRef} autoPlay={true} id="video" />
 
           {showCounter && <div className="timer_camera">{counter}</div>}
         </div>
