@@ -50,25 +50,18 @@ const CameraScreen = () => {
     // eslint-disable-next-line
   }, []);
 
-  let bandera = 0;
+  const [mode, setMode] = useState(0);
+
   const changeCamera = () => {
-    if (bandera === 0) {
-      cameraPhoto
-        .startCamera(FACING_MODES.ENVIRONMENT)
-        .then((res) => {
-          setIsCameraReady(true);
-        })
-        .catch((err) => alert(err));
+    cameraPhoto
+      .startCamera(FACING_MODES[mode])
+      .then((res) => {
+        setIsCameraReady(true);
         bandera = 1;
-    } else {
-      cameraPhoto
-        .startCamera(FACING_MODES.USER)
-        .then((res) => {
-          setIsCameraReady(true);
-        })
-        .catch((err) => alert(err));
-        bandera = 0
-    }
+      })
+      .catch((err) => alert(err));
+
+    setMode(mode === "USER" ? "USER" : "ENVIRONMENT");
   };
 
   useEffect(() => {}, []);
@@ -201,10 +194,9 @@ const CameraScreen = () => {
               onClick={takePhoto}
               disabled={!isCameraReady}
             ></button>
-            <button
-              className="take-btn_camera"
-              onClick={changeCamera}
-            >girar</button>
+            <button className="take-btn_camera" onClick={changeCamera}>
+              girar
+            </button>
           </div>
         </div>
       ) : (
