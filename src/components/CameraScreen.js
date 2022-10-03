@@ -17,7 +17,7 @@ const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
   /** Hooks */
-    const { getDataUri } = useCameraScreen();
+  const { getDataUri } = useCameraScreen();
 
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [photoTaken, setPhotoTaken] = useState(false);
@@ -109,7 +109,6 @@ const CameraScreen = () => {
 
   // Pintar foto en canvas
   const displayPicture = (uri) => {
-    
     // console.log(context.toDataURL("jpg"));
     // let canvas = document.createElement("canvas");
     // let context = canvas.getContext("2d");
@@ -157,7 +156,7 @@ const CameraScreen = () => {
     //     console.log(canvas);
     //     frame.onload = function () {
     //       ctx.drawImage(frame, 0, 0, 670, 350);
-    
+
     //     };
 
     //     frame.src = "./assets/images/frame.png";
@@ -170,15 +169,15 @@ const CameraScreen = () => {
     let image = new Image();
     image.onload = () => {
       context.drawImage(image, canvas.width * 0.1, 0, 470, 350);
-      setImageToDownload(canvas.toDataURL("jpg"));
 
       let frame = new Image();
       frame.onload = () => {
         context.drawImage(frame, 0, 0, 670, 350);
-      }
+        setImageToDownload(canvas.toDataURL('image/jpg'));
+      };
 
       frame.src = "./assets/images/frame.png";
-    }
+    };
 
     image.src = uri;
   };
@@ -187,7 +186,7 @@ const CameraScreen = () => {
   const takePhoto = () => {
     let dataUri = getDataUri();
 
-    if(isTimerSet) {
+    if (isTimerSet) {
       setTimeout(() => {
         setCounter(2);
       }, 1000);
@@ -199,7 +198,7 @@ const CameraScreen = () => {
       setTimeout(() => {
         displayPicture(dataUri);
         setPhotoTaken(true);
-      }, 3000)
+      }, 3000);
     } else {
       displayPicture(dataUri);
       setPhotoTaken(true);
