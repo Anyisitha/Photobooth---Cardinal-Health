@@ -5,12 +5,17 @@ import SettingsModal from './SettingsModal';
 
 import './cameraScreen.css';
 import './animate.compat.css';
+import useCameraScreen from './useCameraScreen';
 
 //Variables de configuracion de enfoque y resolucion de la camara
-const facingMode = FACING_MODES.USER;
+const facingMode = FACING_MODES.ENVIRONMENT;
 const idealResolution = { width: 640, height: 480 };
 
 const CameraScreen = () => {
+    /** Hooks */
+    const {changeCamera} = useCameraScreen();
+
+   
 
     const [isCameraReady, setIsCameraReady] = useState(false);
     const [photoTaken, setPhotoTaken] = useState(false);
@@ -27,22 +32,31 @@ const CameraScreen = () => {
     let cameraPhoto = new CameraPhoto(videoRef.current);
 
     useEffect(() => {
+
         //Instanciar la libreria e iniciar la camara
+        // eslint-disable-next-line
         cameraPhoto = new CameraPhoto(videoRef.current);
+
+        console.log(cameraPhoto.inputVideoDeviceInfos)
         startCamera(facingMode, idealResolution);
             
         if(window.innerWidth < 1200) {
             window.addEventListener("orientationchange", (e) => {
                 const popUp = document.querySelector('.rotatePop');
 
-                if(window.orientation == 0) {
+                if(window.orientation === 0) {
                     popUp.style.display = 'flex';    
                 } else {
                     popUp.style.display = 'none';
                 }
             });
         }
+        // eslint-disable-next-line
+    }, [])
 
+    useEffect(() => {
+        changeCamera(cameraPhoto);
+        // eslint-disable-next-line
     }, [])
 
     const startCamera = (idealFacingMode, idealResolution) => {
@@ -54,6 +68,7 @@ const CameraScreen = () => {
             .catch((error) => {
                 alert(error);
             });
+        
     }
 
     // Pintar foto en canvas
@@ -126,7 +141,7 @@ const CameraScreen = () => {
         
         <div className="main-container_camera animated fadeIn">
             <div className='logo-poto1'>
-                <img src="./assets/images/logo.png" />
+                <img src="./assets/images/logo.png" alt=""/>
             </div>
             <RotateDevicePop />
             
@@ -166,7 +181,7 @@ const CameraScreen = () => {
                 ></canvas>
             </div>
             <div className='logo-poto'>
-                <img src="./assets/images/foto2.png" />
+                <img src="./assets/images/foto2.png" alt=""/>
             </div>
 
             {
@@ -196,6 +211,7 @@ const CameraScreen = () => {
                                 {/* <p className="blue">Descarta esta foto <br /> e intenta de nuevo</p> */}
                             </div>
                             <div className='guardar'>
+                                {/* eslint-disable-next-line */}
                                 <a
                                     id="download"
                                     className="save-btn_camera"

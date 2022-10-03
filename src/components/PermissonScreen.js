@@ -8,7 +8,7 @@ const PermissonScreen = ({ setScreenToShow }) => {
 
     const handleActivateCamera = (screen) => {
         
-        if(window.innerWidth < 1200 && window.orientation == 0) {
+        if(window.innerWidth < 1200 && window.orientation === 0) {
             alert('Por favor gira tu dispositivo');
         } else {
             setScreenToShow(screen);
@@ -51,7 +51,7 @@ const PermissonScreen = ({ setScreenToShow }) => {
             </main>
 
             <div className='logo-poto'>
-                <img src="./assets/images/foto2.png" />
+                <img src="./assets/images/foto2.png" alt=''/>
             </div>
         </div>
     );

@@ -42,7 +42,7 @@ const MainScreen = ({ setScreenToShow }) => {
             </main>
 
             <div className='logo-poto'>
-                <img src="./assets/images/foto2.png" />
+                <img src="./assets/images/foto2.png" alt=''/>
             </div>
         </div>
 
