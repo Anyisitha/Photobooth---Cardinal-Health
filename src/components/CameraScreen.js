@@ -60,7 +60,7 @@ const CameraScreen = () => {
       })
       .catch((err) => alert(err));
 
-    setMode(mode === "USER" ? "USER" : "ENVIRONMENT");
+    setMode(mode === "USER" ? "ENVIRONMENT" : "USER");
   };
 
   useEffect(() => {}, []);
