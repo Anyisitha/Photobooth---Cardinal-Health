@@ -57,7 +57,7 @@ const CameraScreen = () => {
     useEffect(() => {
         navigator.mediaDevices.ondevicechange(() => {
             navigator.mediaDevices.enumerateDevices()
-            .then(() => {
+            .then((res) => {
                 let devices = res.filter((item) => item.kind === "videoinput");
                 console.log(devices)
             })
