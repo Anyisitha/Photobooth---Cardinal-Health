@@ -45,7 +45,7 @@ const CameraScreen = () => {
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
     cameraPhoto = new CameraPhoto(videoRef.current);
-    startCamera(facing, idealResolution);
+    startCamera(FACING_MODES[facing], idealResolution);
     // cameraPhoto = new CameraPhoto(videoRef.current);
 
     // console.log(cameraPhoto.inputVideoDeviceInfos);
