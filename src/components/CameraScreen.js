@@ -50,7 +50,7 @@ const CameraScreen = () => {
     // eslint-disable-next-line
   }, []);
 
-  const [mode, setMode] = useState(0);
+  const [mode, setMode] = useState("USER");
 
   const changeCamera = () => {
     cameraPhoto
