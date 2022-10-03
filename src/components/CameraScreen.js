@@ -107,6 +107,7 @@ const CameraScreen = () => {
     const canvas = document.getElementById("photo");
     const ctx = canvas.getContext("2d");
     const image = new Image();
+    console.log(image)
     if (ctx) {
       image.onload = function () {
         ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
