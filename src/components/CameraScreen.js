@@ -55,9 +55,10 @@ const CameraScreen = () => {
     }, [])
 
     useEffect(() => {
-        changeCamera(cameraPhoto);
+        console.log(cameraPhoto.getInputVideoDeviceInfos())
+        // changeCamera(cameraPhoto);
         // eslint-disable-next-line
-    }, [])
+    }, [cameraPhoto.getInputVideoDeviceInfos()])
 
     const startCamera = (idealFacingMode, idealResolution) => {
         cameraPhoto.startCamera(idealFacingMode, idealResolution)

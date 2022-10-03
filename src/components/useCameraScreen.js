@@ -7,7 +7,7 @@ const useCameraScreen = () => {
      */
     const changeCamera = (cameraPhoto) => {
         
-        console.log(cameraPhoto.getInputVideoDeviceInfos())
+        // console.log(cameraPhoto.getInputVideoDeviceInfos() ? )
     }
 
     changeCamera.propTypes = {
