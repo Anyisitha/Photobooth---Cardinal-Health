@@ -83,7 +83,7 @@ const CameraScreen = () => {
         setIsCameraReady(true);
       })
       .catch((error) => {
-        alert(error);
+        alert(error, "asnid");
       });
   };
 
