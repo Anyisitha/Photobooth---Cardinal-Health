@@ -33,11 +33,11 @@ const CameraScreen = () => {
   let environmentCameraPhoto = null;
 
   useEffect(() => {
-    console.log(facing)
-    if (!facing) {
-      localStorage.setItem("facing", JSON.stringify("USER"));
-    }
-
+      if (!facing) {
+          localStorage.setItem("facing", JSON.stringify("USER"));
+        }
+        
+        console.log(facing)
     let screen = localStorage.getItem("screen");
     if (!screen) {
       localStorage.setItem("screen", JSON.stringify("camera"));
@@ -80,9 +80,7 @@ const CameraScreen = () => {
       );
     }
 
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 2000);
+    window.location.reload();
   };
 
   useEffect(() => {}, []);
