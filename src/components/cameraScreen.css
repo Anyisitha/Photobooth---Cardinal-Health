@@ -164,6 +164,11 @@
     background-image: url(../images/btn-take.png);
     margin: 0 10px;
 }
+
+.btns-wrapper_camera .take-btn_camera2 {
+    background-image: url(../images/image.png);
+    margin: 0 10px;
+}
 .btns-wrapper_camera .save-btn_camera {
     background-image: url(../images/btn-save.png);
     margin: 0 10px;

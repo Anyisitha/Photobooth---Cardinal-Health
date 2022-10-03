@@ -184,6 +184,7 @@ const CameraScreen = () => {
 
   // Tomar la foto
   const takePhoto = () => {
+    localStorage.removeItem("screen")
     let dataUri = getDataUri();
 
     if (isTimerSet) {
@@ -266,18 +267,15 @@ const CameraScreen = () => {
               onClick={takePhoto}
               disabled={!isCameraReady}
             ></button>
-            <button className="take-btn_camera" onClick={changeCamera}>
-              girar
+            <button className="take-btn_camera2" onClick={changeCamera}>
+              
             </button>
           </div>
         </div>
       ) : (
         <div className="btns-wrapper_camera">
           <div className="div-wrapper">
-            <div className="trie">
-              <button onClick={changeCamera}>girar</button>
-              {/* <p className="blue">Descarta esta foto <br /> e intenta de nuevo</p> */}
-            </div>
+           
             <div className="trie">
               <button
                 className="try-btn_camera"
