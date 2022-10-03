@@ -107,7 +107,7 @@ const CameraScreen = () => {
   const displayPicture = (uri) => {
     const canvas = document.getElementById("photo");
     const ctx = canvas.getContext("2d");
-
+    console.log(canvas);
     const image = new Image();
 
     image.onload = function () {
