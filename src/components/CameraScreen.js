@@ -199,6 +199,10 @@ const CameraScreen = () => {
               onClick={takePhoto}
               disabled={!isCameraReady}
             ></button>
+            <button
+              className="take-btn_camera"
+              onClick={changeCamera}
+            >girar</button>
           </div>
         </div>
       ) : (
