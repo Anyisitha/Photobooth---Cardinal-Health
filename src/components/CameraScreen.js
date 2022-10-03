@@ -54,7 +54,7 @@ const CameraScreen = () => {
   const changeCamera = () => {
     if (bandera === 0) {
       cameraPhoto
-        .startCamera(FACING_MODES.ENVIRONMENT, idealResolution)
+        .startCamera(FACING_MODES.ENVIRONMENT)
         .then((res) => {
           setIsCameraReady(true);
         })
@@ -62,7 +62,7 @@ const CameraScreen = () => {
         bandera = 1;
     } else {
       cameraPhoto
-        .startCamera(FACING_MODES.USER, idealResolution)
+        .startCamera(FACING_MODES.USER)
         .then((res) => {
           setIsCameraReady(true);
         })
