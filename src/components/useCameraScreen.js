@@ -1,3 +1,5 @@
+import CameraPhoto from "jslib-html5-camera-photo";
+
 const useCameraScreen = () => {
     /** 
      * Esta funcion cambia la camara de la frontal a la trasera.
@@ -5,7 +7,11 @@ const useCameraScreen = () => {
      */
     const changeCamera = (cameraPhoto) => {
         
-        console.log(cameraPhoto.enumerateCameras()?.then((cameras) => console.log(cameras)))
+        console.log(cameraPhoto)
+    }
+
+    changeCamera.propTypes = {
+        cameraPhoto: typeof CameraPhoto,
     }
 
     return {
