@@ -29,11 +29,10 @@ const CameraScreen = () => {
   const videoRef = useRef();
   const environmentRef = useRef();
   let cameraPhoto = null;
-  let facing = null;
+  let facing = JSON.parse(localStorage.getItem("facing"));
   let environmentCameraPhoto = null;
 
   useEffect(() => {
-    facing = JSON.parse(localStorage.getItem("facing"));
     console.log(facing)
     if (!facing) {
       localStorage.setItem("facing", JSON.stringify("USER"));
