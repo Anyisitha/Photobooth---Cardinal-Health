@@ -39,8 +39,8 @@ const CameraScreen = () => {
     }
 
     let screen = localStorage.getItem("facing");
-    if(screen){
-        localStorage.setItem("screen", "camera");
+    if (screen) {
+      localStorage.setItem("screen", "camera");
     }
     //Instanciar la libreria e iniciar la camara
     // eslint-disable-next-line
@@ -67,10 +67,21 @@ const CameraScreen = () => {
   const changeCamera = () => {
     setIsCameraReady(false);
     restartCamera();
-    localStorage.setItem("facing", facing === "USER" ? "ENVIRONMENT" : "USER");
+    if (facing === "USER") {
+      localStorage.setItem(
+        "facing",
+        "ENVIRONMENT"
+      );
+    } else {
+      localStorage.setItem(
+        "facing",
+        "USER"
+      );
+    }
+
     setTimeout(() => {
-        window.location.reload();
-    }, 2000)
+      window.location.reload();
+    }, 2000);
   };
 
   useEffect(() => {}, []);
@@ -112,7 +123,7 @@ const CameraScreen = () => {
 
   // Tomar la foto
   const takePhoto = () => {
-    localStorage.removeItem("screen")
+    localStorage.removeItem("screen");
     const config = {
       sizeFactor: 1,
     };
