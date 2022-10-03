@@ -104,27 +104,28 @@ const CameraScreen = () => {
 
   // Pintar foto en canvas
   const displayPicture = (uri) => {
-    const canvas = document.getElementById("photo");
-    const ctx = canvas.getContext("2d");
-    const image = new Image();
-    console.log(image)
-    if (ctx) {
-      image.onload = function () {
-        ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
+    console.log(uri)
+    // const canvas = document.getElementById("photo");
+    // const ctx = canvas.getContext("2d");
+    // const image = new Image();
+    // console.log(image)
+    // if (ctx) {
+    //   image.onload = function () {
+    //     ctx.drawImage(image, canvas.width * 0.1, 0, 470, 350);
 
-        const frame = new Image();
+    //     const frame = new Image();
 
-        console.log(canvas);
-        frame.onload = function () {
-          ctx.drawImage(frame, 0, 0, 670, 350);
-          setImageToDownload(canvas.toDataURL("image/jpg"));
-        };
+    //     console.log(canvas);
+    //     frame.onload = function () {
+    //       ctx.drawImage(frame, 0, 0, 670, 350);
+    //       setImageToDownload(canvas.toDataURL("image/jpg"));
+    //     };
 
-        frame.src = "./assets/images/frame.png";
-      };
+    //     frame.src = "./assets/images/frame.png";
+    //   };
 
-      image.src = uri;
-    }
+    //   image.src = uri;
+    // }
   };
 
   // Tomar la foto
@@ -134,7 +135,6 @@ const CameraScreen = () => {
       sizeFactor: 1,
     };
 
-    console.log(isTimerSet);
 
     if (isTimerSet) {
       //Cuando se activa el temporizador
